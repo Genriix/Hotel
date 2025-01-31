@@ -34,6 +34,7 @@ namespace Hotel.Pages
 
         private static void AddNewPassword(string oldPassword, string newPassword, string repPassword)
         {
+            User.errors.Clear();
             using (SqlConnection connection = new SqlConnection(Manager.connectionString))
             {
                 connection.Open();
@@ -70,7 +71,6 @@ namespace Hotel.Pages
                         command.Parameters.AddWithValue("@NewPassword", newPassword); // Вместо ЮсерТайпИд пишем 1
                         command.Parameters.AddWithValue("@id", User.GetUser_id()); // Вместо Логин пишем то, что в Текстбоксе, и так далее
 
-                        // Выполнение команды
                         int rowsAffected = command.ExecuteNonQuery();
                     }
                     MessageBox.Show("Пароль сменён!", "Успех!");
