@@ -22,7 +22,6 @@ namespace Hotel
     /// </summary>
     public partial class LoginPage : Page
     {
-        public static StringBuilder errors = new StringBuilder();
 
         public LoginPage()
         {
@@ -44,14 +43,14 @@ namespace Hotel
             }
             else
             {
-                MessageBox.Show(errors.ToString(), "Ошибка входа");
+                MessageBox.Show(User.errors.ToString(), "Ошибка входа");
             }
-            errors.Clear();
+            User.errors.Clear();
         }
 
         private static bool IsErrorsEmpty()
         {
-            return errors.Length == 0;
+            return User.errors.Length == 0;
         }
     }
 }

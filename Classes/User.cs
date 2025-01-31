@@ -11,6 +11,8 @@ namespace Hotel.Classes
     {
         private static int user_id;
         private static int user_role_id;
+        public static StringBuilder errors = new StringBuilder();
+
 
         public static int GetUser_id()
         {
@@ -27,7 +29,6 @@ namespace Hotel.Classes
             {
                 int founded_id = 0;
                 int founded_role = 0;
-                string founded_password = "";
                 connection.Open();
 
                 string query = "SELECT id, Role_id FROM [User] WHERE Login = @Login";
@@ -44,8 +45,7 @@ namespace Hotel.Classes
                         }
                         else
                         {
-                            LoginPage.errors.AppendLine("Пользователь не найден");
-
+                            errors.AppendLine("Пользователь не найден");
                         }
                     }
                 }
@@ -60,7 +60,6 @@ namespace Hotel.Classes
                     {
                         if (reader.Read())
                         {
-                            //founded_password += reader.GetString(0);
                             if (password == reader.GetString(0))
                             {
                                 user_id = founded_id;
@@ -68,7 +67,7 @@ namespace Hotel.Classes
                             }
                             else
                             {
-                                LoginPage.errors.AppendLine("Пароль не правильный");
+                                errors.AppendLine("Пароль не правильный");
                             }
                         }
                     }
